@@ -15,7 +15,7 @@ CREATE TABLE car(
                     id BIGINT NOT NULL AUTO_INCREMENT,
                     brand VARCHAR(255) NOT NULL,
                     model VARCHAR(255) NOT NULL,
-                    license_plate CHAR(6) NOT NULL,
+                    license_plate CHAR(8) NOT NULL,
                     user_id BIGINT NOT NULL,
                     create_time TIMESTAMP NOT NULL,
                     update_time TIMESTAMP NOT NULL,

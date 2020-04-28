@@ -2,7 +2,6 @@ package com.nearcodeconsulting.exercise.domain.service;
 
 import com.nearcodeconsulting.exercise.domain.exception.DomainException;
 import com.nearcodeconsulting.exercise.domain.model.Car;
-import com.nearcodeconsulting.exercise.domain.model.User;
 import com.nearcodeconsulting.exercise.domain.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
