@@ -6,6 +6,8 @@ import com.nearcodeconsulting.exercise.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +35,17 @@ public class UserService {
         }
 
         return userRepository.save(user);
+    }
+
+    public List<User> save(List<User> users) {
+
+        List<User> savedUsers = new ArrayList<>();
+
+        for (User user : users) {
+            savedUsers.add(save(user));
+        }
+
+        return savedUsers;
     }
 
     public void delete(Long userId) {

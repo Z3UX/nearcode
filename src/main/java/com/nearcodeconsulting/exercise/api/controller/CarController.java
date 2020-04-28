@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/user/{userId}/car")
+@RequestMapping("/api")
 public class CarController {
 
     @Autowired
@@ -32,12 +32,12 @@ public class CarController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping
+    @GetMapping({"user/{userId}/car", "user/{userId}/cars"})
     public List<CarRepresentationModel> listAll(@PathVariable Long userId) {
         return toCollectionModel(carRepository.findCarsByUser(userService.get(userId)));
     }
 
-    @PostMapping
+    @PostMapping("user/{userId}/car")
     @ResponseStatus(HttpStatus.CREATED)
     public CarRepresentationModel add(@Valid @PathVariable Long userId, @RequestBody Car car) {
         User user = userService.get(userId);
@@ -48,6 +48,22 @@ public class CarController {
 
         car.setUser(user);
         return toModel(carService.save(car));
+    }
+
+    @PostMapping("user/{userId}/cars")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<CarRepresentationModel> add(@Valid @PathVariable Long userId, @RequestBody List<Car> cars) {
+        User user = userService.get(userId);
+
+        if (user == null) {
+            throw new DomainException("There's no user with that ID.");
+        }
+
+        for (Car car : cars) {
+            car.setUser(user);
+        }
+
+        return toCollectionModel(carService.save(cars));
     }
 
     private CarRepresentationModel toModel(Car car) {

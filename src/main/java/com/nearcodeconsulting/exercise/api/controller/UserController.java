@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
@@ -28,12 +28,12 @@ public class UserController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping
+    @GetMapping({"/user", "/users"})
     public List<UserRepresentationModel> listAll() {
         return toCollectionModel(userRepository.findAll());
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping({"/user/{userId}", "/users/{userId}"})
     public ResponseEntity<UserRepresentationModel> findUser(@PathVariable Long userId) {
         Optional<User> user = userRepository.findById(userId);
 
@@ -45,14 +45,20 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping("/user")
     @ResponseStatus(HttpStatus.CREATED)
     public UserRepresentationModel add(@Valid @RequestBody User user) {
         return toModel(userService.save(user));
     }
 
+    @PostMapping("/users")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<UserRepresentationModel> add(@Valid @RequestBody List<User> users) {
+        return toCollectionModel(userService.save(users));
+    }
+
     /*
-    @PutMapping("/{userId}")
+    @PutMapping("/user/{userId}")
     public ResponseEntity<UserRepresentationModel> update(@Valid @PathVariable Long userId, @RequestBody User user) {
 
         if (!userRepository.existsById(userId)) {
@@ -65,7 +71,7 @@ public class UserController {
         return ResponseEntity.ok(toModel(user));
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/user/{userId}")
     public ResponseEntity<Void> delete(@PathVariable Long userId) {
         if (!userRepository.existsById(userId)) {
             return ResponseEntity.notFound().build();
