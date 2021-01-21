@@ -57,7 +57,6 @@ public class UserController {
         return toCollectionModel(userService.save(users));
     }
 
-    /*
     @PutMapping("/user/{userId}")
     public ResponseEntity<UserRepresentationModel> update(@Valid @PathVariable Long userId, @RequestBody User user) {
 
@@ -81,12 +80,13 @@ public class UserController {
 
         return ResponseEntity.noContent().build();
     }
-    */
 
-    private UserRepresentationModel toModel(User user ) {
+    // TODO MOVE TO A UTILITY CLASS
+    private UserRepresentationModel toModel(User user) {
         return modelMapper.map(user, UserRepresentationModel.class);
     }
 
+    // TODO MOVE TO A UTILITY CLASS
     private List<UserRepresentationModel> toCollectionModel(List<User> users) {
         return users.stream()
                 .map(user -> toModel(user))

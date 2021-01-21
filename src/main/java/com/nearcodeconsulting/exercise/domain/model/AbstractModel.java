@@ -36,7 +36,7 @@ public abstract class AbstractModel implements Model {
     }
 
     /**
-     * @see Model#setId(Integer)
+     * @see Model#setId(Long)
      */
     @Override
     public void setId(Long id) {

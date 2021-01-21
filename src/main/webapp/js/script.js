@@ -48,7 +48,7 @@ function userCars(id) {
     }
 
     $.ajax({
-        url: 'http://localhost:8080/api/user/' + id + '/car',
+        url: window.location.origin + '/api/user/' + id + '/car',
         success: successCallback,
     });
 

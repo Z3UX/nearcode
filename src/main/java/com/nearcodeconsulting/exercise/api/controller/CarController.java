@@ -66,10 +66,12 @@ public class CarController {
         return toCollectionModel(carService.save(cars));
     }
 
+    // TODO MOVE TO A UTILITY CLASS
     private CarRepresentationModel toModel(Car car) {
         return modelMapper.map(car, CarRepresentationModel.class);
     }
 
+    // TODO MOVE TO A UTILITY CLASS
     private List<CarRepresentationModel> toCollectionModel(List<Car> cars) {
         return cars.stream()
                 .map(car -> toModel(car))

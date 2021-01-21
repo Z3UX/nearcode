@@ -18,7 +18,7 @@ public class ApiController {
 
     }
 
-    private static class ApiVersion {
+    private class ApiVersion {
 
         private String name;
         private String version;

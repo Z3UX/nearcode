@@ -1,14 +1,9 @@
 package com.nearcodeconsulting.exercise.domain.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "car")
@@ -26,8 +21,8 @@ public class Car extends AbstractModel {
     private String model;
 
     @NotBlank
-    @Pattern(regexp="^(([A-Z]{2}-\\d{2}-(\\d{2}|[A-Z]{2}))|(\\d{2}-(\\d{2}-[A-Z]{2}|[A-Z]{2}-\\d{2})))$",
-            message ="Insert a valid license plate format: AA-00-00, 00-00-AA, 00-AA-00 or AA-00-AA")
+    @Pattern(regexp = "^(([A-Za-z]{2}-\\d{2}-(\\d{2}|[A-Za-z]{2}))|(\\d{2}-(\\d{2}-[A-Za-z]{2}|[A-Za-z]{2}-\\d{2})))$",
+            message = "Insert a valid license plate format: AA-00-00, 00-00-AA, 00-AA-00 or AA-00-AA")
     @Size(min = 8, max = 8)
     private String licensePlate;
 
